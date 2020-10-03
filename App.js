@@ -1,11 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Sistemas 24/7 app...</Text>
+      <Image
+        style={styles.tinyLogo}
+        source={require("./assets/logo247_blanco.png")}
+      />
       <StatusBar style="auto" />
     </View>
   );
@@ -18,4 +21,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  tinyLogo: {
+    width: 350,
+    height: 350,
+  },
+  /* logo: {
+    width: 66,
+    height: 58,
+  }, */
 });
