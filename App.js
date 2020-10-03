@@ -11,6 +11,7 @@ const Stack = createStackNavigator();
 
 // Create the client as outlined in the setup guide
 const client = new ApolloClient({
+  uri: "http://35.223.26.105:4002/graphql",
   cache: new InMemoryCache(),
 });
 
@@ -39,3 +40,5 @@ export default function App() {
     </ApolloProvider>
   );
 }
+
+AppRegistry.registerComponent("MyApplication", () => App);
