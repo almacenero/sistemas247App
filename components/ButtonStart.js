@@ -6,7 +6,7 @@ const ButtonStart = ({ navigation }) => {
     <Button
       color="#215e97"
       title="Opciones"
-      onPress={() => navigation.navigate("Options", {})}
+      onPress={() => navigation.navigate("Options")}
     />
   );
 };

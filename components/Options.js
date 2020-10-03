@@ -11,14 +11,21 @@ const DATA = [
   },
 ];
 
-const Item = ({ title }) => (
+const Item = ({ title, navigation }) => (
   <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
+    <Text
+      style={styles.title}
+      onPress={() => navigation.navigate("WorkOrderList", {})}
+    >
+      {title}
+    </Text>
   </View>
 );
 
-const Options = () => {
-  const renderItem = ({ item }) => <Item title={item.title} />;
+const Options = ({ navigation }) => {
+  const renderItem = ({ item }) => (
+    <Item title={item.title} navigation={navigation} />
+  );
   return (
     <View style={styles.container}>
       <SafeAreaView>
