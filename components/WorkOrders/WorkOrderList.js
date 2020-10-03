@@ -1,0 +1,88 @@
+import * as React from "react";
+import { StyleSheet, View, Text, SafeAreaView, FlatList } from "react-native";
+import { useQuery, gql } from "@apollo/client";
+
+const GET_WORK_ORDERS = gql`
+  {
+    workOrders {
+      _id
+      client_id
+      productDamage
+      date
+      address
+      price
+      status
+    }
+  }
+`;
+
+const Item = ({ productDamage, status }) => (
+  <View style={styles.item}>
+    <Text
+      style={styles.title}
+      //onPress={() => navigation.navigate("WorkOrderList", {})}
+    >
+      {productDamage} - ({status})
+    </Text>
+  </View>
+);
+
+const WorkOrderList = () => {
+  const renderItem = ({ item }) => (
+    <Item
+      productDamage={item.productDamage}
+      status={item.status}
+      //navigation={navigation}
+    />
+  );
+  const { loading, error, data } = useQuery(GET_WORK_ORDERS, {
+    pollInterval: 500,
+  });
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error :(</Text>;
+  return (
+    <View style={styles.container}>
+      {/* {data.workOrders.map(({ _id, productDamage }) => (
+        <Text key={_id}>{productDamage} </Text>
+      ))} */}
+      <SafeAreaView>
+        <FlatList
+          data={data.workOrders}
+          renderItem={renderItem}
+          keyExtractor={(item) => item._id}
+        />
+      </SafeAreaView>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    //flex: 1,
+    //backgroundColor: "#fff",
+    //alignItems: "center",
+    //justifyContent: "center",
+    //marginVertical: 120,
+  },
+  tinyLogo: {
+    width: 350,
+    height: 350,
+  },
+  item: {
+    //backgroundColor: "#215e97",
+    //borderColor: "#215e97",
+    //borderStyle: "solid",
+    borderColor: "#215e97",
+    borderWidth: 1,
+    padding: 5,
+    marginVertical: 5,
+    marginHorizontal: 5,
+    borderRadius: 5,
+  },
+  title: {
+    fontSize: 13,
+    color: "#215e97",
+  },
+});
+
+export default WorkOrderList;
