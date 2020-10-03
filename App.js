@@ -1,32 +1,26 @@
-import { StatusBar } from "expo-status-bar";
+import "react-native-gesture-handler";
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-
+import { StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Welcome from "./components/Welcome";
+import Options from "./components/Options";
+const Stack = createStackNavigator();
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.tinyLogo}
-        source={require("./assets/logo247_blanco.png")}
-      />
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Welcome"
+          component={Welcome}
+          options={{ title: "Bienvenido" }}
+        />
+        <Stack.Screen
+          name="Options"
+          component={Options}
+          options={{ title: "Opciones" }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  tinyLogo: {
-    width: 350,
-    height: 350,
-  },
-  /* logo: {
-    width: 66,
-    height: 58,
-  }, */
-});
