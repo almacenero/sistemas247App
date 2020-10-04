@@ -7,6 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Welcome from "./components/Welcome";
 import WorkOrderList from "./components/WorkOrders/WorkOrderList";
 import Options from "./components/Options";
+import CreateWorkOrder from "./components/WorkOrders/CreateWorkOrder";
 const Stack = createStackNavigator();
 
 // Create the client as outlined in the setup guide
@@ -34,6 +35,11 @@ export default function App() {
             name="WorkOrderList"
             component={WorkOrderList}
             options={{ title: "Ordenes de Trabajo" }}
+          />
+          <Stack.Screen
+            name="CreateWorkOrder"
+            component={CreateWorkOrder}
+            options={{ title: "Nueva Orden de Trabajo" }}
           />
         </Stack.Navigator>
       </NavigationContainer>

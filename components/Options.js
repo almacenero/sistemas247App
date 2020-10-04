@@ -4,18 +4,20 @@ const DATA = [
   {
     id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
     title: "Ordenes de servicio",
+    component: "WorkOrderList",
   },
   {
     id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
     title: "Crear nueva Orden de servicio",
+    component: "CreateWorkOrder",
   },
 ];
 
-const Item = ({ title, navigation }) => (
+const Item = ({ title, navigation, component }) => (
   <View style={styles.item}>
     <Text
       style={styles.title}
-      onPress={() => navigation.navigate("WorkOrderList", {})}
+      onPress={() => navigation.navigate(component, {})}
     >
       {title}
     </Text>
@@ -24,7 +26,11 @@ const Item = ({ title, navigation }) => (
 
 const Options = ({ navigation }) => {
   const renderItem = ({ item }) => (
-    <Item title={item.title} navigation={navigation} />
+    <Item
+      title={item.title}
+      navigation={navigation}
+      component={item.component}
+    />
   );
   return (
     <View style={styles.container}>
