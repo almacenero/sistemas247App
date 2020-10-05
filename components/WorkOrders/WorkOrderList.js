@@ -16,23 +16,47 @@ const GET_WORK_ORDERS = gql`
   }
 `;
 
-const Item = ({ productDamage, status }) => (
+const Item = ({
+  productDamage,
+  status,
+  navigation,
+  _id,
+  address,
+  date,
+  price,
+  client_id,
+}) => (
   <View style={styles.item}>
     <Text
       style={styles.title}
-      //onPress={() => navigation.navigate("WorkOrderList", {})}
+      onPress={() =>
+        navigation.navigate("WorkOrderItem", {
+          status,
+          productDamage,
+          _id,
+          address,
+          date,
+          price,
+          client_id,
+        })
+      }
     >
       {productDamage} - ({status})
     </Text>
   </View>
 );
 
-const WorkOrderList = () => {
+const WorkOrderList = ({ navigation }) => {
   const renderItem = ({ item }) => (
     <Item
       productDamage={item.productDamage}
       status={item.status}
-      //navigation={navigation}
+      client_id={item.client_id}
+      price={item.price}
+      date={item.date}
+      address={item.address}
+      _id={item._id}
+      navigation={navigation}
     />
   );
   const { loading, error, data } = useQuery(GET_WORK_ORDERS, {

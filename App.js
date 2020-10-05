@@ -8,6 +8,7 @@ import Welcome from "./components/Welcome";
 import WorkOrderList from "./components/WorkOrders/WorkOrderList";
 import Options from "./components/Options";
 import CreateWorkOrder from "./components/WorkOrders/CreateWorkOrder";
+import WorkOrderItem from "./components/WorkOrders/WorkOrderItem";
 const Stack = createStackNavigator();
 
 // Create the client as outlined in the setup guide
@@ -40,6 +41,11 @@ export default function App() {
             name="CreateWorkOrder"
             component={CreateWorkOrder}
             options={{ title: "Nueva Orden de Trabajo" }}
+          />
+          <Stack.Screen
+            name="WorkOrderItem"
+            component={WorkOrderItem}
+            options={{ title: "Orden de Trabajo" }}
           />
         </Stack.Navigator>
       </NavigationContainer>
