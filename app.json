@@ -13,11 +13,15 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "com.sistemas247.sistemas247App",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.sistemas247.sistemas247App",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
