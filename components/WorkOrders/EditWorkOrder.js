@@ -1,5 +1,12 @@
 import * as React from "react";
-import { StyleSheet, View, Text, TextInput, Button } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Button,
+  ScrollView,
+} from "react-native";
 import { Picker } from "@react-native-community/picker";
 import { useMutation, gql } from "@apollo/client";
 
@@ -57,58 +64,60 @@ const EditWorkOrder = ({ route, navigation }) => {
   if (error) return <Text>Error :(</Text>;
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Cliente: </Text>
-      <TextInput
-        style={styles.textInput}
-        onChangeText={(text) => onChangeClient(text)}
-        value={client}
-      />
-      <Text style={styles.label}>Dirección: </Text>
-      <TextInput
-        style={styles.textInput}
-        onChangeText={(text) => onChangeAddress(text)}
-        value={address}
-      />
-      <Text style={styles.label}>Precio: </Text>
-      <TextInput
-        style={styles.textInput}
-        onChangeText={(text) => onChangePrice(text)}
-        value={price}
-      />
-      <Text style={styles.label}>Daño: </Text>
-      <TextInput
-        style={styles.textInput}
-        onChangeText={(text) => onChangeProductDamage(text)}
-        value={productDamage}
-      />
-      <Text style={styles.label}>Estado: </Text>
-      <Picker
-        selectedValue={selectedValue}
-        style={{
-          height: 50,
-          width: 150,
-          borderRadius: 5,
-          marginBottom: 15,
-          paddingLeft: 10,
-        }}
-        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-      >
-        <Picker.Item label="En proceso.." value="en proceso.." />
-        <Picker.Item label="Terminado" value="terminado" />
-        <Picker.Item label="Pendiente" value="pendiente" />
-      </Picker>
-      <Button
-        style={styles.saveButton}
-        //color="black"
-        color="#215e97"
-        title="Guardar"
-        onPress={() => {
-          navigation.navigate("WorkOrderList");
-          handleCreateWorkOrder();
-        }}
-      />
-    </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.label}>Cliente: </Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => onChangeClient(text)}
+          value={client}
+        />
+        <Text style={styles.label}>Dirección: </Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => onChangeAddress(text)}
+          value={address}
+        />
+        <Text style={styles.label}>Precio: </Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => onChangePrice(text)}
+          value={price}
+        />
+        <Text style={styles.label}>Daño: </Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => onChangeProductDamage(text)}
+          value={productDamage}
+        />
+        <Text style={styles.label}>Estado: </Text>
+        <Picker
+          selectedValue={selectedValue}
+          style={{
+            height: 50,
+            width: 150,
+            borderRadius: 5,
+            marginBottom: 15,
+            paddingLeft: 10,
+          }}
+          onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+        >
+          <Picker.Item label="En proceso.." value="en proceso.." />
+          <Picker.Item label="Terminado" value="terminado" />
+          <Picker.Item label="Pendiente" value="pendiente" />
+        </Picker>
+        <Button
+          style={styles.saveButton}
+          //color="black"
+          color="#215e97"
+          title="Guardar"
+          onPress={() => {
+            navigation.navigate("WorkOrderList");
+            handleCreateWorkOrder();
+          }}
+        />
+      </View>
+    </ScrollView>
   );
 };
 

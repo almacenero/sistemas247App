@@ -1,5 +1,12 @@
 import * as React from "react";
-import { StyleSheet, View, Text, Alert, Button } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Alert,
+  Button,
+  ScrollView,
+} from "react-native";
 import { useMutation, gql } from "@apollo/client";
 
 const DELETE_WORK_ORDER = gql`
@@ -23,7 +30,7 @@ const WorkOrderItem = ({ route, navigation }) => {
   const createTwoButtonAlert = () =>
     Alert.alert(
       "Estas seguro que vas a eliminar la orden:",
-      _id,
+      productDamage,
       [
         {
           text: "Cancelar",
@@ -47,41 +54,47 @@ const WorkOrderItem = ({ route, navigation }) => {
   if (loading) return <Text>Cargando....</Text>;
   if (error) return <Text>Error :(</Text>;
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Numero de orden:</Text>
-      <Text style={styles.fontContent}>{_id}</Text>
-      <Text style={styles.label}>Cliente:</Text>
-      <Text style={styles.fontContent}>{client}</Text>
-      <Text style={styles.label}>Daño:</Text>
-      <Text style={styles.fontContent}>{productDamage}</Text>
-      <Text style={styles.label}>Fecha:</Text>
-      <Text style={styles.fontContent}>{date}</Text>
-      <Text style={styles.label}>Precio:</Text>
-      <Text style={styles.fontContent}>${price}</Text>
-      <Text style={styles.label}>Estado:</Text>
-      <Text style={styles.fontContent}>{status}</Text>
-      <View style={styles.buttonContainer}>
-        <View styles={{ width: 50, height: 50 }}>
-          <Button
-            color="#fca652"
-            title="Editar"
-            onPress={() =>
-              navigation.navigate("EditWorkOrder", {
-                _id,
-                address,
-                status,
-                productDamage,
-                price,
-                client,
-              })
-            }
-          />
-        </View>
-        <View styles={{ width: 50, height: 50 }}>
-          <Button color="red" title="Eliminar" onPress={createTwoButtonAlert} />
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.label}>Numero de orden:</Text>
+        <Text style={styles.fontContent}>{_id}</Text>
+        <Text style={styles.label}>Cliente:</Text>
+        <Text style={styles.fontContent}>{client}</Text>
+        <Text style={styles.label}>Daño:</Text>
+        <Text style={styles.fontContent}>{productDamage}</Text>
+        <Text style={styles.label}>Fecha:</Text>
+        <Text style={styles.fontContent}>{date}</Text>
+        <Text style={styles.label}>Precio:</Text>
+        <Text style={styles.fontContent}>${price}</Text>
+        <Text style={styles.label}>Estado:</Text>
+        <Text style={styles.fontContent}>{status}</Text>
+        <View style={styles.buttonContainer}>
+          <View styles={{ width: 50, height: 50 }}>
+            <Button
+              color="#fca652"
+              title="Editar"
+              onPress={() =>
+                navigation.navigate("EditWorkOrder", {
+                  _id,
+                  address,
+                  status,
+                  productDamage,
+                  price,
+                  client,
+                })
+              }
+            />
+          </View>
+          <View styles={{ width: 50, height: 50 }}>
+            <Button
+              color="red"
+              title="Eliminar"
+              onPress={createTwoButtonAlert}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
