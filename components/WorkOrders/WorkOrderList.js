@@ -1,5 +1,12 @@
 import * as React from "react";
-import { StyleSheet, View, Text, SafeAreaView, FlatList } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  SafeAreaView,
+  FlatList,
+  ScrollView,
+} from "react-native";
 import { useQuery, gql } from "@apollo/client";
 
 const GET_WORK_ORDERS = gql`
@@ -26,24 +33,26 @@ const Item = ({
   price,
   client_id,
 }) => (
-  <View style={styles.item}>
-    <Text
-      style={styles.title}
-      onPress={() =>
-        navigation.navigate("WorkOrderItem", {
-          status,
-          productDamage,
-          _id,
-          address,
-          date,
-          price,
-          client_id,
-        })
-      }
-    >
-      {productDamage} - ({status})
-    </Text>
-  </View>
+  <ScrollView>
+    <View style={styles.item}>
+      <Text
+        style={styles.title}
+        onPress={() =>
+          navigation.navigate("WorkOrderItem", {
+            status,
+            productDamage,
+            _id,
+            address,
+            date,
+            price,
+            client_id,
+          })
+        }
+      >
+        {productDamage} - ({status})
+      </Text>
+    </View>
+  </ScrollView>
 );
 
 const WorkOrderList = ({ navigation }) => {

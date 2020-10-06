@@ -20,7 +20,7 @@ const CREATE_WORK_ORDER = gql`
   }
 `;
 
-const Welcome = () => {
+const CreateWorkOrder = () => {
   const [client, onChangeClient] = React.useState("");
   const [address, onChangeAddress] = React.useState("");
   const [price, onChangePrice] = React.useState();
@@ -101,4 +101,4 @@ const styles = StyleSheet.create({
   label: { marginVertical: 5, marginHorizontal: 15 },
 });
 
-export default Welcome;
+export default CreateWorkOrder;
