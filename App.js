@@ -9,6 +9,7 @@ import WorkOrderList from "./components/WorkOrders/WorkOrderList";
 import Options from "./components/Options";
 import CreateWorkOrder from "./components/WorkOrders/CreateWorkOrder";
 import WorkOrderItem from "./components/WorkOrders/WorkOrderItem";
+import MainMaps from "./components/Maps/MainMaps";
 import EditWorkOrder from "./components/WorkOrders/EditWorkOrder";
 const Stack = createStackNavigator();
 
@@ -52,6 +53,11 @@ export default function App() {
             name="EditWorkOrder"
             component={EditWorkOrder}
             options={{ title: "Editar Orden de Trabajo" }}
+          />
+          <Stack.Screen
+            name="MainMaps"
+            component={MainMaps}
+            options={{ title: "Ubicación" }}
           />
         </Stack.Navigator>
       </NavigationContainer>

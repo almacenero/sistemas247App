@@ -11,6 +11,11 @@ const DATA = [
     title: "Crear nueva Orden de servicio",
     component: "CreateWorkOrder",
   },
+  {
+    id: "3ac68afc-c605-48d3-a4f8-fbd91aa9787",
+    title: "Ubicación",
+    component: "MainMaps",
+  },
 ];
 
 const Item = ({ title, navigation, component }) => (
