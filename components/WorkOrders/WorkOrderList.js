@@ -19,6 +19,9 @@ const GET_WORK_ORDERS = gql`
       address
       price
       status
+      past
+      redCar
+      van
     }
   }
 `;
@@ -32,6 +35,9 @@ const Item = ({
   date,
   price,
   client_id,
+  past,
+  redCar,
+  van,
 }) => (
   <ScrollView>
     <View style={styles.item}>
@@ -46,6 +52,9 @@ const Item = ({
             date,
             price,
             client_id,
+            past,
+            redCar,
+            van,
           })
         }
       >
@@ -66,6 +75,9 @@ const WorkOrderList = ({ navigation }) => {
       address={item.address}
       _id={item._id}
       navigation={navigation}
+      past={item.past}
+      redCar={item.redCar}
+      van={item.van}
     />
   );
   const { loading, error, data } = useQuery(GET_WORK_ORDERS, {

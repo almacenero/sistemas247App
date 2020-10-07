@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Picker } from "@react-native-community/picker";
 import { useMutation, gql } from "@apollo/client";
-
+import { CheckBox } from "react-native-elements";
 const UPDATE_WORK_ORDER = gql`
   mutation UpdateWorkOrder(
     $_id: String
@@ -18,6 +18,9 @@ const UPDATE_WORK_ORDER = gql`
     $address: String
     $price: Float
     $status: String
+    $past: String
+    $redCar: Boolean
+    $van: Boolean
   ) {
     updateWorkOrder(
       _id: $_id
@@ -26,6 +29,9 @@ const UPDATE_WORK_ORDER = gql`
       address: $address
       price: $price
       status: $status
+      past: $past
+      redCar: $redCar
+      van: $van
     ) {
       _id
     }
@@ -39,6 +45,9 @@ const EditWorkOrder = ({ route, navigation }) => {
   const [price, onChangePrice] = React.useState(route.params.price);
   // const [status, onChangeStatus] = React.useState(route.params.status);
   const [selectedValue, setSelectedValue] = React.useState(route.params.status);
+  const [pastInput, setpastInput] = React.useState(route.params.past);
+  const [redCarInput, setredCarInput] = React.useState(route.params.redCar);
+  const [vanInput, setvanInput] = React.useState(route.params.van);
   const [productDamage, onChangeProductDamage] = React.useState(
     route.params.productDamage
   );
@@ -52,6 +61,9 @@ const EditWorkOrder = ({ route, navigation }) => {
         address: address,
         price: parseFloat(price),
         status: selectedValue,
+        past: pastInput,
+        redCar: redCarInput,
+        van: vanInput,
       },
     });
     onChangeClient("");
@@ -83,6 +95,23 @@ const EditWorkOrder = ({ route, navigation }) => {
           style={styles.textInput}
           onChangeText={(text) => onChangePrice(text)}
           value={price}
+        />
+        <Text style={styles.label}>Antecedentes: </Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => setpastInput(text)}
+          value={pastInput}
+        />
+        <Text style={styles.label}>Transporte: </Text>
+        <CheckBox
+          title="Rojo"
+          checked={redCarInput}
+          onPress={() => setredCarInput(!redCarInput)}
+        />
+        <CheckBox
+          title="Blanco"
+          checked={vanInput}
+          onPress={() => setvanInput(!vanInput)}
         />
         <Text style={styles.label}>Daño: </Text>
         <TextInput
