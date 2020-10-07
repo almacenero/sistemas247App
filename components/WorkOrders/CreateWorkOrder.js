@@ -1,5 +1,12 @@
 import * as React from "react";
-import { StyleSheet, View, Text, TextInput, Button } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Button,
+  ScrollView,
+} from "react-native";
 import { CheckBox } from "react-native-elements";
 import { useMutation, gql } from "@apollo/client";
 
@@ -61,56 +68,58 @@ const CreateWorkOrder = () => {
   if (error) return <Text>Error :(</Text>;
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Cliente: </Text>
-      <TextInput
-        style={styles.textInput}
-        onChangeText={(text) => onChangeClient(text)}
-        value={client}
-      />
-      <Text style={styles.label}>Dirección: </Text>
-      <TextInput
-        style={styles.textInput}
-        onChangeText={(text) => onChangeAddress(text)}
-        value={address}
-      />
-      <Text style={styles.label}>Precio: </Text>
-      <TextInput
-        style={styles.textInput}
-        onChangeText={(text) => onChangePrice(text)}
-        value={price}
-      />
-      <Text style={styles.label}>Antecedentes: </Text>
-      <TextInput
-        style={styles.textInput}
-        onChangeText={(text) => setpastInput(text)}
-        value={pastInput}
-      />
-      <Text style={styles.label}>Transporte: </Text>
-      <CheckBox
-        title="Rojo"
-        checked={redCarInput}
-        onPress={() => setredCarInput(!redCarInput)}
-      />
-      <CheckBox
-        title="Blanco"
-        checked={vanInput}
-        onPress={() => setvanInput(!vanInput)}
-      />
-      <Text style={styles.label}>Daño: </Text>
-      <TextInput
-        style={styles.textInput}
-        onChangeText={(text) => onChangeProductDamage(text)}
-        value={productDamage}
-      />
-      <Button
-        style={styles.saveButton}
-        //color="black"
-        color="#215e97"
-        title="Guardar"
-        onPress={() => handleCreateWorkOrder()}
-      />
-    </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.label}>Cliente: </Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => onChangeClient(text)}
+          value={client}
+        />
+        <Text style={styles.label}>Dirección: </Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => onChangeAddress(text)}
+          value={address}
+        />
+        <Text style={styles.label}>Precio: </Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => onChangePrice(text)}
+          value={price}
+        />
+        <Text style={styles.label}>Antecedentes: </Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => setpastInput(text)}
+          value={pastInput}
+        />
+        <Text style={styles.label}>Transporte: </Text>
+        <CheckBox
+          title="Rojo"
+          checked={redCarInput}
+          onPress={() => setredCarInput(!redCarInput)}
+        />
+        <CheckBox
+          title="Blanco"
+          checked={vanInput}
+          onPress={() => setvanInput(!vanInput)}
+        />
+        <Text style={styles.label}>Daño: </Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => onChangeProductDamage(text)}
+          value={productDamage}
+        />
+        <Button
+          style={styles.saveButton}
+          //color="black"
+          color="#215e97"
+          title="Guardar"
+          onPress={() => handleCreateWorkOrder()}
+        />
+      </View>
+    </ScrollView>
   );
 };
 
