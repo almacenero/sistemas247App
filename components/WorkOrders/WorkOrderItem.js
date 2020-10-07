@@ -22,6 +22,9 @@ const WorkOrderItem = ({ route, navigation }) => {
   const [client, onChangeClient] = React.useState(route.params.client_id);
   const [address, onChangeAddress] = React.useState(route.params.address);
   const [price, onChangePrice] = React.useState(route.params.price);
+  const [past, setpastInput] = React.useState(route.params.past);
+  const [redCar, setredCarInput] = React.useState(route.params.redCar);
+  const [van, setvanInput] = React.useState(route.params.van);
   const [productDamage, onChangeProductDamage] = React.useState(
     route.params.productDamage
   );
@@ -81,6 +84,9 @@ const WorkOrderItem = ({ route, navigation }) => {
                   productDamage,
                   price,
                   client,
+                  past,
+                  redCar,
+                  van,
                 })
               }
             />
