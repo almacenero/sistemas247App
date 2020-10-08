@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   FlatList,
   ScrollView,
+  Button,
 } from "react-native";
 import { useQuery, gql } from "@apollo/client";
 
@@ -21,7 +22,8 @@ const GET_WORK_ORDERS = gql`
       status
       past
       redCar
-      van
+      latitude
+      longitude
     }
   }
 `;
@@ -38,6 +40,8 @@ const Item = ({
   past,
   redCar,
   van,
+  latitude,
+  longitude,
 }) => (
   <ScrollView>
     <View style={styles.item}>
@@ -60,6 +64,16 @@ const Item = ({
       >
         {productDamage} - ({status})
       </Text>
+      <Button
+        color="#215e97"
+        title="Ubicación"
+        onPress={() =>
+          navigation.navigate("MainMaps", {
+            latitude,
+            longitude,
+          })
+        }
+      />
     </View>
   </ScrollView>
 );
@@ -78,6 +92,8 @@ const WorkOrderList = ({ navigation }) => {
       past={item.past}
       redCar={item.redCar}
       van={item.van}
+      longitude={item.longitude}
+      latitude={item.latitude}
     />
   );
   const { loading, error, data } = useQuery(GET_WORK_ORDERS, {

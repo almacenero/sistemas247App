@@ -1,8 +1,13 @@
 import React from "react";
-import MapView, { Marker, Polyline } from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
+import Sistemas247Marker from "./Sistemas247Marker";
+import ClientMarker from "./ClientMarker";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 
-const MainMaps = () => {
+const MainMaps = ({ route }) => {
+  const [latitude, setLatitude] = React.useState(route.params.latitude);
+  const [longitude, setLongitude] = React.useState(route.params.longitude);
+
   const Sistemas247 = {
     latitude: -1.334265,
     longitude: -78.547499,
@@ -23,11 +28,8 @@ const MainMaps = () => {
           longitudeDelta: 0.05,
         }}
       >
-        <Marker
-          coordinate={{ latitude: -1.334265, longitude: -78.547499 }}
-          pinColor="#215e97"
-        >
-          {/* <View
+        <Sistemas247Marker latitude={-1.334265} longitude={-78.547499} />
+        {/* <View
               style={{
                 paddingVertical: 10,
                 paddingHorizontal: 30,
@@ -39,9 +41,9 @@ const MainMaps = () => {
             >
               <Text style={{ color: "#fff" }}>Sistemas 24/7</Text>
             </View> */}
-        </Marker>
-        <Marker coordinate={{ latitude: -1.332527, longitude: -78.548754 }} />
-        <Polyline coordinates={[Sistemas247, Cliente]} />
+        {latitude && longitude ? (
+          <ClientMarker latitude={latitude} longitude={longitude} />
+        ) : null}
       </MapView>
     </View>
   );
