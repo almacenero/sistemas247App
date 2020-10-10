@@ -20,6 +20,7 @@ const MainMaps = ({ route }) => {
   return (
     <View style={styles.container}>
       <MapView
+        provider="google"
         style={styles.mapStyle}
         initialRegion={{
           latitude: -1.334265,

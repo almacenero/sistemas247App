@@ -7,7 +7,7 @@ const ClientMarker = ({ latitude, longitude }) => {
   console.log("longitud: ", longitude);
   return (
     <Marker
-      coordinate={{ latitude: -1.2896366, longitude: -78.59731 }}
+      coordinate={{ latitude: latitude, longitude: longitude }}
       pinColor="red"
     />
   );
