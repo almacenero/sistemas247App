@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { CheckBox } from "react-native-elements";
 import { useMutation, gql } from "@apollo/client";
+import * as Location from "expo-location";
 
 const CREATE_WORK_ORDER = gql`
   mutation CreateWorkOrder(
@@ -19,6 +20,8 @@ const CREATE_WORK_ORDER = gql`
     $past: String
     $redCar: Boolean
     $van: Boolean
+    $latitude: Float
+    $longitude: Float
   ) {
     createWorkOrder(
       client_id: $client_id
@@ -28,6 +31,8 @@ const CREATE_WORK_ORDER = gql`
       past: $past
       redCar: $redCar
       van: $van
+      latitude: $latitude
+      longitude: $longitude
     ) {
       _id
     }
@@ -43,6 +48,23 @@ const CreateWorkOrder = () => {
   const [redCarInput, setredCarInput] = React.useState(false);
   const [vanInput, setvanInput] = React.useState(false);
   const [createWorkOrder, { error, loading }] = useMutation(CREATE_WORK_ORDER);
+
+  const [location, setLocation] = React.useState(null);
+  const [errorMsg, setErrorMsg] = React.useState(null);
+  const [latitude, setLatitude] = React.useState();
+  const [longitude, setLongitude] = React.useState();
+
+  const handleLatitude = (la) => {
+    if (la !== latitude) {
+      setLatitude(la);
+    }
+  };
+  const handleLongitude = (lo) => {
+    if (lo !== longitude) {
+      setLongitude(lo);
+    }
+  };
+
   const handleCreateWorkOrder = () => {
     createWorkOrder({
       variables: {
@@ -53,6 +75,8 @@ const CreateWorkOrder = () => {
         past: pastInput,
         van: vanInput,
         redCar: redCarInput,
+        latitude: latitude,
+        longitude: longitude,
       },
     });
     onChangeClient("");
@@ -64,6 +88,26 @@ const CreateWorkOrder = () => {
     setvanInput(false);
   };
 
+  React.useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+
+  let text = "Waiting..";
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    handleLatitude(location.coords.latitude);
+    handleLongitude(location.coords.longitude);
+    text = JSON.stringify(location);
+  }
   if (loading) return <Text>Loading...</Text>;
   if (error) return <Text>Error :(</Text>;
 
