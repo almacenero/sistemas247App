@@ -21,7 +21,10 @@
     },
     "android": {
       "package": "com.sistemas247.sistemas247App",
-      "versionCode": 1
+      "versionCode": 1,
+      "config": {
+        "googleMaps": { "apiKey": "AIzaSyDcWj-_ljO_BPY7nf1sCRik081fkXj7IMc" }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
