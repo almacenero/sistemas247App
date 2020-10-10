@@ -95,7 +95,9 @@ const CreateWorkOrder = () => {
         setErrorMsg("Permission to access location was denied");
       }
 
-      let location = await Location.getCurrentPositionAsync({});
+      let location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.BestForNavigation,
+      });
       setLocation(location);
     })();
   }, []);

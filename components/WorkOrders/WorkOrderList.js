@@ -62,7 +62,8 @@ const Item = ({
           })
         }
       >
-        {productDamage} - ({status})
+        {productDamage} - ({status}), coordenas -(latitud: {latitude}, longitud:{" "}
+        {longitude})
       </Text>
       <Button
         color="#215e97"
