@@ -3,6 +3,7 @@ import MapView, { Marker } from "react-native-maps";
 import Sistemas247Marker from "./Sistemas247Marker";
 import ClientMarker from "./ClientMarker";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
+import MapViewDirections from "react-native-maps-directions";
 
 const MainMaps = ({ route }) => {
   const [latitude, setLatitude] = React.useState(route.params.latitude);
@@ -14,9 +15,13 @@ const MainMaps = ({ route }) => {
   };
 
   const Cliente = {
-    latitude: -1.332527,
-    longitude: -78.548754,
+    latitude: latitude,
+    longitude: longitude,
   };
+
+  const origin = Sistemas247;
+  const destination = Cliente;
+  const GOOGLE_MAPS_APIKEY = "AIzaSyDcWj-_ljO_BPY7nf1sCRik081fkXj7IMc";
   return (
     <View style={styles.container}>
       <MapView
@@ -29,7 +34,14 @@ const MainMaps = ({ route }) => {
           longitudeDelta: 0.05,
         }}
       >
-        <Sistemas247Marker latitude={-1.334265} longitude={-78.547499} />
+        <MapViewDirections
+          origin={origin}
+          destination={destination}
+          apikey={GOOGLE_MAPS_APIKEY}
+          strokeWidth={3}
+          strokeColor="#215e97"
+        />
+        <Sistemas247Marker latitude={-1.334539} longitude={-78.547557} />
         {/* <View
               style={{
                 paddingVertical: 10,
