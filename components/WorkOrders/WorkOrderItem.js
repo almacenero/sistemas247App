@@ -25,6 +25,7 @@ const WorkOrderItem = ({ route, navigation }) => {
   const [past, setpastInput] = React.useState(route.params.past);
   const [redCar, setredCarInput] = React.useState(route.params.redCar);
   const [van, setvanInput] = React.useState(route.params.van);
+  const [solution, setsolutionInput] = React.useState(route.params.solution);
   const [productDamage, onChangeProductDamage] = React.useState(
     route.params.productDamage
   );
@@ -65,6 +66,8 @@ const WorkOrderItem = ({ route, navigation }) => {
         <Text style={styles.fontContent}>{client}</Text>
         <Text style={styles.label}>Daño:</Text>
         <Text style={styles.fontContent}>{productDamage}</Text>
+        <Text style={styles.label}>Solución:</Text>
+        <Text style={styles.fontContent}>{solution}</Text>
         <Text style={styles.label}>Fecha:</Text>
         <Text style={styles.fontContent}>{date}</Text>
         <Text style={styles.label}>Precio:</Text>
@@ -87,6 +90,7 @@ const WorkOrderItem = ({ route, navigation }) => {
                   past,
                   redCar,
                   van,
+                  solution,
                 })
               }
             />

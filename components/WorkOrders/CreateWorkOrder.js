@@ -22,6 +22,7 @@ const CREATE_WORK_ORDER = gql`
     $van: Boolean
     $latitude: Float
     $longitude: Float
+    $solution: String
   ) {
     createWorkOrder(
       client_id: $client_id
@@ -33,6 +34,7 @@ const CREATE_WORK_ORDER = gql`
       van: $van
       latitude: $latitude
       longitude: $longitude
+      solution: $solution
     ) {
       _id
     }
@@ -42,7 +44,7 @@ const CREATE_WORK_ORDER = gql`
 const CreateWorkOrder = () => {
   const [client, onChangeClient] = React.useState("");
   const [address, onChangeAddress] = React.useState("");
-  const [price, onChangePrice] = React.useState();
+  const [price, onChangePrice] = React.useState(0);
   const [productDamage, onChangeProductDamage] = React.useState("");
   const [pastInput, setpastInput] = React.useState("");
   const [redCarInput, setredCarInput] = React.useState(false);
@@ -53,7 +55,7 @@ const CreateWorkOrder = () => {
   const [errorMsg, setErrorMsg] = React.useState(null);
   const [latitude, setLatitude] = React.useState();
   const [longitude, setLongitude] = React.useState();
-
+  const [solutionInput, setsolutionInput] = React.useState("");
   const handleLatitude = (la) => {
     if (la !== latitude) {
       setLatitude(la);
@@ -77,6 +79,7 @@ const CreateWorkOrder = () => {
         redCar: redCarInput,
         latitude: latitude,
         longitude: longitude,
+        solution: solutionInput,
       },
     });
     onChangeClient("");
@@ -86,6 +89,7 @@ const CreateWorkOrder = () => {
     setpastInput("");
     setredCarInput(false);
     setvanInput(false);
+    setsolutionInput("");
   };
 
   React.useEffect(() => {
@@ -156,6 +160,12 @@ const CreateWorkOrder = () => {
           style={styles.textInput}
           onChangeText={(text) => onChangeProductDamage(text)}
           value={productDamage}
+        />
+        <Text style={styles.label}>Solución: </Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => setsolutionInput(text)}
+          value={solutionInput}
         />
         <Button
           style={styles.saveButton}
