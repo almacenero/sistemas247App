@@ -24,6 +24,7 @@ const GET_WORK_ORDERS = gql`
       redCar
       latitude
       longitude
+      solution
     }
   }
 `;
@@ -42,6 +43,7 @@ const Item = ({
   van,
   latitude,
   longitude,
+  solution,
 }) => (
   <ScrollView>
     <View style={styles.item}>
@@ -59,6 +61,7 @@ const Item = ({
             past,
             redCar,
             van,
+            solution,
           })
         }
       >
@@ -95,6 +98,7 @@ const WorkOrderList = ({ navigation }) => {
       van={item.van}
       longitude={item.longitude}
       latitude={item.latitude}
+      solution={item.solution}
     />
   );
   const { loading, error, data } = useQuery(GET_WORK_ORDERS, {

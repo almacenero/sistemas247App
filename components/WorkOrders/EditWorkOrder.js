@@ -21,6 +21,7 @@ const UPDATE_WORK_ORDER = gql`
     $past: String
     $redCar: Boolean
     $van: Boolean
+    $solution: String
   ) {
     updateWorkOrder(
       _id: $_id
@@ -32,6 +33,7 @@ const UPDATE_WORK_ORDER = gql`
       past: $past
       redCar: $redCar
       van: $van
+      solution: $solution
     ) {
       _id
     }
@@ -48,6 +50,9 @@ const EditWorkOrder = ({ route, navigation }) => {
   const [pastInput, setpastInput] = React.useState(route.params.past);
   const [redCarInput, setredCarInput] = React.useState(route.params.redCar);
   const [vanInput, setvanInput] = React.useState(route.params.van);
+  const [solutionInput, setsolutionInput] = React.useState(
+    route.params.solution
+  );
   const [productDamage, onChangeProductDamage] = React.useState(
     route.params.productDamage
   );
@@ -64,6 +69,7 @@ const EditWorkOrder = ({ route, navigation }) => {
         past: pastInput,
         redCar: redCarInput,
         van: vanInput,
+        solution: solutionInput,
       },
     });
     onChangeClient("");
@@ -118,6 +124,12 @@ const EditWorkOrder = ({ route, navigation }) => {
           style={styles.textInput}
           onChangeText={(text) => onChangeProductDamage(text)}
           value={productDamage}
+        />
+        <Text style={styles.label}>Solución: </Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => setsolutionInput(text)}
+          value={solutionInput}
         />
         <Text style={styles.label}>Estado: </Text>
         <Picker
