@@ -10,6 +10,7 @@ import {
 import { CheckBox } from "react-native-elements";
 import { useMutation, gql } from "@apollo/client";
 import * as Location from "expo-location";
+import SearchClient from "./../Clients/SearchClient";
 
 const CREATE_WORK_ORDER = gql`
   mutation CreateWorkOrder(
@@ -119,6 +120,7 @@ const CreateWorkOrder = () => {
 
   return (
     <ScrollView>
+      <SearchClient />
       <View style={styles.container}>
         <Text style={styles.label}>Cliente: </Text>
         <TextInput
