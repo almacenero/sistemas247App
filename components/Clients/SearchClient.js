@@ -27,7 +27,7 @@ function SearchClient() {
     });
     setciInput("");
   };
-  if (loading) return <Text>Cargando....</Text>;
+  if (loading) return <Text style={styles.LoadingStyle}>Cargando....</Text>;
   //if (error) return <p>Error :(</p>;
   return (
     <View style={styles.container}>
@@ -45,15 +45,17 @@ function SearchClient() {
         onPress={() => handleCreateWorkOrder()}
       />
       {data && data.findClientByCi !== null && (
-        <View>
+        <View style={styles.successMessage}>
           {handleClient(data.findClientByCi._id, data.findClientByCi.name)}
-          <Text>Hemos encontrado a: {client_name}</Text>
+          <Text style={styles.successMessageText}>
+            Hemos encontrado a: {client_name}
+          </Text>
         </View>
       )}
       {data && data.findClientByCi === null && (
-        <View>
+        <View style={styles.successError}>
           {handleClearClient()}
-          <Text>No se encuentra!</Text>
+          <Text style={styles.successErrorText}>No se encuentra!</Text>
         </View>
       )}
     </View>
@@ -80,4 +82,30 @@ const styles = StyleSheet.create({
     marginBottom: 35,
   },
   label: { marginVertical: 5, marginHorizontal: 15 },
+  LoadingStyle: {
+    fontSize: 45,
+    textAlign: "center",
+    paddingTop: 20,
+    color: "#aa3a3a",
+  },
+  successMessage: {
+    backgroundColor: "#81b214",
+    marginTop: 20,
+    padding: 20,
+    borderRadius: 10,
+  },
+  successMessageText: {
+    color: "white",
+    fontSize: 19,
+  },
+  successError: {
+    backgroundColor: "#ec524b",
+    marginTop: 20,
+    padding: 20,
+    borderRadius: 10,
+  },
+  successErrorText: {
+    color: "white",
+    fontSize: 19,
+  },
 });

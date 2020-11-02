@@ -11,6 +11,7 @@ import { CheckBox } from "react-native-elements";
 import { useMutation, gql } from "@apollo/client";
 import * as Location from "expo-location";
 import SearchClient from "./../Clients/SearchClient";
+import { ClientSearchContext } from "./../Contexts/ClientSearchContext";
 
 const CREATE_WORK_ORDER = gql`
   mutation CreateWorkOrder(
@@ -43,7 +44,7 @@ const CREATE_WORK_ORDER = gql`
 `;
 
 const CreateWorkOrder = () => {
-  const [client, onChangeClient] = React.useState("");
+  const { client_id } = React.useContext(ClientSearchContext);
   const [address, onChangeAddress] = React.useState("");
   const [price, onChangePrice] = React.useState(0);
   const [productDamage, onChangeProductDamage] = React.useState("");
@@ -71,7 +72,7 @@ const CreateWorkOrder = () => {
   const handleCreateWorkOrder = () => {
     createWorkOrder({
       variables: {
-        client_id: client,
+        client_id: client_id,
         productDamage: productDamage,
         address: address,
         price: parseFloat(price),
@@ -83,7 +84,6 @@ const CreateWorkOrder = () => {
         solution: solutionInput,
       },
     });
-    onChangeClient("");
     onChangeAddress("");
     onChangePrice();
     onChangeProductDamage("");
@@ -122,12 +122,6 @@ const CreateWorkOrder = () => {
     <ScrollView>
       <SearchClient />
       <View style={styles.container}>
-        <Text style={styles.label}>Cliente: </Text>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={(text) => onChangeClient(text)}
-          value={client}
-        />
         <Text style={styles.label}>Dirección: </Text>
         <TextInput
           style={styles.textInput}
