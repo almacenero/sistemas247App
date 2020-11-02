@@ -7,6 +7,11 @@ const DATA = [
     component: "WorkOrderList",
   },
   {
+    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f65",
+    title: "Nuevo Cliente",
+    component: "CreateClient",
+  },
+  {
     id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
     title: "Crear nueva Orden de servicio",
     component: "CreateWorkOrder",
@@ -56,7 +61,7 @@ const styles = StyleSheet.create({
     //backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    marginVertical: 120,
+    marginVertical: 20,
   },
   tinyLogo: {
     width: 350,

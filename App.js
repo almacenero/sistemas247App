@@ -11,6 +11,7 @@ import CreateWorkOrder from "./components/WorkOrders/CreateWorkOrder";
 import WorkOrderItem from "./components/WorkOrders/WorkOrderItem";
 import MainMaps from "./components/Maps/MainMaps";
 import EditWorkOrder from "./components/WorkOrders/EditWorkOrder";
+import CreateClient from "./components/Clients/CreateClient";
 import { ClientSearchProvider } from "./components/Contexts/ClientSearchContext";
 const Stack = createStackNavigator();
 
@@ -40,6 +41,11 @@ export default function App() {
               name="WorkOrderList"
               component={WorkOrderList}
               options={{ title: "Ordenes de Trabajo" }}
+            />
+            <Stack.Screen
+              name="CreateClient"
+              component={CreateClient}
+              options={{ title: "Nuevo Cliente" }}
             />
             <Stack.Screen
               name="CreateWorkOrder"
