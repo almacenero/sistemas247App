@@ -8,9 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import { useMutation, gql } from "@apollo/client";
-import SearchClient from "./../Clients/SearchClient";
-import { ClientSearchContext } from "./../Contexts/ClientSearchContext";
-import { SignatureScreen } from "./../DigitalSignature/index";
+import { SignatureContext } from "./../Contexts/SignatureContext";
 
 const CREATE_CLIENT = gql`
   mutation CreateClient(
@@ -43,7 +41,7 @@ const CREATE_CLIENT = gql`
 `;
 
 const CreateClient = ({ navigation }) => {
-  const { client_id } = React.useContext(ClientSearchContext);
+  const { file } = React.useContext(SignatureContext);
   const [createClient, { error, loading }] = useMutation(CREATE_CLIENT);
 
   const [nameInput, setnameInput] = React.useState("");

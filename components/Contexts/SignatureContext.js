@@ -15,12 +15,16 @@ class SignatureProvider extends React.Component {
     }
   };
 
+  handleClearFile = () => {
+    this.setState({ file: null });
+  };
   render() {
     return (
       <SignatureContext.Provider
         value={{
           handleFile: this.handleFile,
           file: this.state.file,
+          handleClearFile: this.handleClearFile,
         }}
       >
         {this.props.children}

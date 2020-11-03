@@ -4,7 +4,7 @@ import Signature from "react-native-signature-canvas";
 import { SignatureContext } from "./../Contexts/SignatureContext";
 
 export const SignatureScreen = () => {
-  const { handleFile } = useContext(SignatureContext);
+  const { handleFile, handleClearFile } = useContext(SignatureContext);
   const [signature, setSign] = useState(null);
 
   const handleSignature = (signature) => {
@@ -15,6 +15,7 @@ export const SignatureScreen = () => {
 
   const handleEmpty = () => {
     console.log("Empty");
+    handleClearFile();
   };
 
   const style = `.m-signature-pad--footer
@@ -36,7 +37,7 @@ export const SignatureScreen = () => {
       <Signature
         onOK={handleSignature}
         onEmpty={handleEmpty}
-        descriptionText="Sign"
+        descriptionText="Firma"
         clearText="Limpiar"
         confirmText="Guardar"
         webStyle={style}
