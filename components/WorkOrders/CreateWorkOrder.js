@@ -25,6 +25,7 @@ const CREATE_WORK_ORDER = gql`
     $latitude: Float
     $longitude: Float
     $solution: String
+    $productSerie: String
   ) {
     createWorkOrder(
       client_id: $client_id
@@ -37,6 +38,7 @@ const CREATE_WORK_ORDER = gql`
       latitude: $latitude
       longitude: $longitude
       solution: $solution
+      productSerie: $productSerie
     ) {
       _id
     }
@@ -51,6 +53,7 @@ const CreateWorkOrder = () => {
   const [pastInput, setpastInput] = React.useState("");
   const [redCarInput, setredCarInput] = React.useState(false);
   const [vanInput, setvanInput] = React.useState(false);
+  const [productSerie, setproductSerieInput] = React.useState("");
   const [createWorkOrder, { error, loading }] = useMutation(CREATE_WORK_ORDER);
 
   const [location, setLocation] = React.useState(null);
@@ -82,6 +85,7 @@ const CreateWorkOrder = () => {
         latitude: latitude,
         longitude: longitude,
         solution: solutionInput,
+        productSerie: productSerie,
       },
     });
     onChangeAddress("");
@@ -91,6 +95,7 @@ const CreateWorkOrder = () => {
     setredCarInput(false);
     setvanInput(false);
     setsolutionInput("");
+    setproductSerieInput("");
   };
 
   React.useEffect(() => {
@@ -122,6 +127,12 @@ const CreateWorkOrder = () => {
     <ScrollView>
       <SearchClient />
       <View style={styles.container}>
+        <Text style={styles.label}>Número de Série/Imei: </Text>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => setproductSerieInput(text)}
+          value={productSerie}
+        />
         <Text style={styles.label}>Dirección: </Text>
         <TextInput
           style={styles.textInput}

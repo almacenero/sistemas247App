@@ -27,7 +27,7 @@ function SearchClient() {
     });
     setciInput("");
   };
-  if (loading) return <Text style={styles.LoadingStyle}>Cargando....</Text>;
+  if (loading) return <Text style={styles.LoadingStyle}>Buscando....</Text>;
   //if (error) return <p>Error :(</p>;
   return (
     <View style={styles.container}>
