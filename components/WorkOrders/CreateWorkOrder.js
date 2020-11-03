@@ -10,6 +10,8 @@ import {
 import { CheckBox } from "react-native-elements";
 import { useMutation, gql } from "@apollo/client";
 import * as Location from "expo-location";
+import SearchClient from "./../Clients/SearchClient";
+import { ClientSearchContext } from "./../Contexts/ClientSearchContext";
 
 const CREATE_WORK_ORDER = gql`
   mutation CreateWorkOrder(
@@ -23,6 +25,7 @@ const CREATE_WORK_ORDER = gql`
     $latitude: Float
     $longitude: Float
     $solution: String
+    $productSerie: String
   ) {
     createWorkOrder(
       client_id: $client_id
@@ -35,6 +38,7 @@ const CREATE_WORK_ORDER = gql`
       latitude: $latitude
       longitude: $longitude
       solution: $solution
+      productSerie: $productSerie
     ) {
       _id
     }
@@ -42,13 +46,14 @@ const CREATE_WORK_ORDER = gql`
 `;
 
 const CreateWorkOrder = () => {
-  const [client, onChangeClient] = React.useState("");
+  const { client_id } = React.useContext(ClientSearchContext);
   const [address, onChangeAddress] = React.useState("");
   const [price, onChangePrice] = React.useState(0);
   const [productDamage, onChangeProductDamage] = React.useState("");
   const [pastInput, setpastInput] = React.useState("");
   const [redCarInput, setredCarInput] = React.useState(false);
   const [vanInput, setvanInput] = React.useState(false);
+  const [productSerie, setproductSerieInput] = React.useState("");
   const [createWorkOrder, { error, loading }] = useMutation(CREATE_WORK_ORDER);
 
   const [location, setLocation] = React.useState(null);
@@ -70,7 +75,7 @@ const CreateWorkOrder = () => {
   const handleCreateWorkOrder = () => {
     createWorkOrder({
       variables: {
-        client_id: client,
+        client_id: client_id,
         productDamage: productDamage,
         address: address,
         price: parseFloat(price),
@@ -80,9 +85,9 @@ const CreateWorkOrder = () => {
         latitude: latitude,
         longitude: longitude,
         solution: solutionInput,
+        productSerie: productSerie,
       },
     });
-    onChangeClient("");
     onChangeAddress("");
     onChangePrice();
     onChangeProductDamage("");
@@ -90,6 +95,7 @@ const CreateWorkOrder = () => {
     setredCarInput(false);
     setvanInput(false);
     setsolutionInput("");
+    setproductSerieInput("");
   };
 
   React.useEffect(() => {
@@ -119,12 +125,13 @@ const CreateWorkOrder = () => {
 
   return (
     <ScrollView>
+      <SearchClient />
       <View style={styles.container}>
-        <Text style={styles.label}>Cliente: </Text>
+        <Text style={styles.label}>Número de Série/Imei: </Text>
         <TextInput
           style={styles.textInput}
-          onChangeText={(text) => onChangeClient(text)}
-          value={client}
+          onChangeText={(text) => setproductSerieInput(text)}
+          value={productSerie}
         />
         <Text style={styles.label}>Dirección: </Text>
         <TextInput
