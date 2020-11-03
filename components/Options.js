@@ -21,6 +21,11 @@ const DATA = [
     title: "Ubicación",
     component: "MainMaps",
   },
+  {
+    id: "3ac68afc-c605-48d3-a4f8-fbd91aa877",
+    title: "Firma Digital",
+    component: "SignatureScreen",
+  },
 ];
 
 const Item = ({ title, navigation, component }) => (

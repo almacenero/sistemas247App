@@ -10,6 +10,7 @@ import {
 import { useMutation, gql } from "@apollo/client";
 import SearchClient from "./../Clients/SearchClient";
 import { ClientSearchContext } from "./../Contexts/ClientSearchContext";
+import { SignatureScreen } from "./../DigitalSignature/index";
 
 const CREATE_CLIENT = gql`
   mutation CreateClient(
@@ -41,7 +42,7 @@ const CREATE_CLIENT = gql`
   }
 `;
 
-const CreateClient = () => {
+const CreateClient = ({ navigation }) => {
   const { client_id } = React.useContext(ClientSearchContext);
   const [createClient, { error, loading }] = useMutation(CREATE_CLIENT);
 
@@ -123,6 +124,15 @@ const CreateClient = () => {
           onChangeText={(text) => setcityInput(text)}
           value={cityInput}
         />
+        <View style={styles.signerButton}>
+          <Button
+            //color="black"
+            color="#f6830f"
+            title="Firmar"
+            onPress={() => navigation.navigate("SignatureScreen", {})}
+          />
+        </View>
+
         <Button
           style={styles.saveButton}
           //color="black"
@@ -153,6 +163,9 @@ const styles = StyleSheet.create({
     marginBottom: 35,
   },
   label: { marginVertical: 5, marginHorizontal: 15 },
+  signerButton: {
+    marginBottom: 25,
+  },
 });
 
 export default CreateClient;

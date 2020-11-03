@@ -1,57 +1,69 @@
-import React, {
-  Fragment,
-  useRef,
-  useState,
-  useEffect,
-  useContext,
-} from "react";
-import SignatureCanvas from "react-signature-canvas";
-//import { SignatureContext } from "./../../../Context/SignatureContext";
-import { Button, View, Text } from "react-native";
+import React, { useState, useContext } from "react";
+import { StyleSheet, Text, View, Image } from "react-native";
+import Signature from "react-native-signature-canvas";
+import { SignatureContext } from "./../Contexts/SignatureContext";
 
-export const DigitalSignature = () => {
-  //const { handleFile, file } = useContext(SignatureContext);
-  const signatureRef = useRef({});
-  const [imageData, setImageData] = useState("");
-  const [error, setError] = useState(false);
-  const saveSignature = (signature) => {
-    setImageData(signature);
-    //handleFile(imageData);
+export const SignatureScreen = () => {
+  const { handleFile } = useContext(SignatureContext);
+  const [signature, setSign] = useState(null);
+
+  const handleSignature = (signature) => {
+    console.log(signature);
+    setSign(signature);
+    handleFile(signature);
   };
-  useEffect(() => {
-    //console.log(imageData);
-    //handleFile(imageData);
-  }, [imageData]);
+
+  const handleEmpty = () => {
+    console.log("Empty");
+  };
+
+  const style = `.m-signature-pad--footer
+    .button {
+      background-color: red;
+      color: #FFF;
+    }`;
   return (
-    <Fragment>
-      <SignatureCanvas
-        canvasProps={{
-          width: 330,
-          height: 200,
-          style: { border: "1px solid #000000" },
-        }}
-        penColor="#405263"
-        minWidth={1}
-        maxWidth={2}
-        ref={signatureRef}
-        onEnd={() => {
-          saveSignature(
-            signatureRef.current.getTrimmedCanvas().toDataURL("image/jpg")
-          );
-        }}
-        onBegin={() => {
-          setError(false);
-        }}
+    <View style={{ flex: 1 }}>
+      <View style={styles.preview}>
+        {signature ? (
+          <Image
+            resizeMode={"contain"}
+            style={{ width: 335, height: 114 }}
+            source={{ uri: signature }}
+          />
+        ) : null}
+      </View>
+      <Signature
+        onOK={handleSignature}
+        onEmpty={handleEmpty}
+        descriptionText="Sign"
+        clearText="Limpiar"
+        confirmText="Guardar"
+        webStyle={style}
       />
-      <Button
-        onClick={() => {
-          signatureRef.current.clear();
-          saveSignature(null);
-        }}
-      >
-        Borrar
-      </Button>
-      <View>{error ? <Text>La firma es obligatoria</Text> : false}</View>
-    </Fragment>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  preview: {
+    width: 235,
+    height: 114,
+    backgroundColor: "#F8F8F8",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 15,
+  },
+  previewText: {
+    color: "#FFF",
+    fontSize: 14,
+    height: 40,
+    lineHeight: 40,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: "#69B2FF",
+    width: 120,
+    textAlign: "center",
+    marginTop: 10,
+  },
+});
